@@ -98,6 +98,7 @@ def mergeSort(array):
     return merge(mergeSort(left), mergeSort(right))
 
 
+# 快速排序
 def quickSort(array, left, right):
     if left >= right:
         return
@@ -125,7 +126,6 @@ def partSort(array, left, right):
     array[left] = array[pivot]
     array[pivot] = temp
     return left
-
 
 if __name__ == '__main__':
     array = [7, 8, 2, 3, 4, 1, 5]
