@@ -69,8 +69,8 @@ def package01(node, weight):
             k = i + 1
             if k >= node[j].cost:
                 newV = node[j].value
-                if (k - node[j].cost >= 0) and j - 1 >= 0:
-                    newV = newV + result[k - node[j].cost][j - 1].value
+                if (k - node[j].cost - 1 >= 0) and j - 1 >= 0:
+                    newV = newV + result[k - node[j].cost - 1][j - 1].value
                 if newV > lastV:
                     value = newV
             result[i][j] = Ele(value)
