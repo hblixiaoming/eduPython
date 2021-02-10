@@ -54,8 +54,19 @@ def in_traverse_loop(node):
         return
     stack = []
     stack.append(node)
-
-
+    traversed = []
+    while len(stack) > 0:
+        n = stack.pop()
+        if n.l_child is not None and n not in traversed and n.l_child not in traversed:
+            stack.append(n)
+            stack.append(n.l_child)
+        elif n.r_child is not None and n.r_child not in traversed:
+            print(n.data, end=' ')
+            stack.append(n.r_child)
+            traversed.append(n)
+        else:
+            print(n.data, end=' ')
+            traversed.append(n)
 
 
 def post_traverse(node):
@@ -92,6 +103,9 @@ if __name__ == '__main__':
     print()
     print('-----in_traverse----- ')
     in_traverse(root)
+    print()
+    print('-----in_traverse_loop----- ')
+    in_traverse_loop(root)
     print()
     print('-----post_traverse----- ')
     post_traverse(root)
