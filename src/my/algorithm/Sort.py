@@ -127,6 +127,61 @@ def partSort(array, left, right):
     array[pivot] = temp
     return left
 
+'''
+ 挖坑法快排
+'''
+
+def quickSort_w(array, left, right):
+    if left >= right:
+        return
+    index = partSort_w(array, left, right)
+    quickSort_w(array, left, index - 1)
+    quickSort_w(array, index + 1, right)
+    pass
+
+
+def partSort_w(array, left, right):
+    key = array[left]
+    while left < right:
+        while left < right and array[right] >= key:
+            right = right - 1
+        array[left] = array[right]
+        while left < right and array[left] <= key:
+            left = left + 1
+        array[right] = array[left]
+        pass
+    array[left] = key
+    return left
+
+'''
+前后指针法
+'''
+def quickSort_q(array, left, right):
+    if left >= right:
+        return
+    index = partSort_w(array, left, right)
+    quickSort_w(array, left, index - 1)
+    quickSort_w(array, index + 1, right)
+    pass
+
+
+def partSort_q(array, left, right):
+    cur = left
+    pre = left - 1
+    key = array[right]
+    while cur < right:
+        if array[cur] < key and ++pre != cur:
+            temp = array[cur]
+            array[cur] = array[pre]
+            array[pre] = temp
+        ++cur
+    prePlus = ++pre
+    temp = array[prePlus]
+    array[prePlus] = array[right]
+    array[right] = temp
+    return right
+
+
 if __name__ == '__main__':
     array = [7, 8, 2, 3, 4, 1, 5]
     print("----buddle sort-----")
@@ -151,5 +206,10 @@ if __name__ == '__main__':
     print("----quick sort-----")
     array = [7, 8, 2, 3, 4, 1, 5]
     quickSort(array, 0, len(array) - 1)
+    print(array)
+
+    print("----quick sort w-----")
+    array = [7, 8, 2, 3, 4, 1, 5]
+    quickSort_w(array, 0, len(array) - 1)
     print(array)
     pass
